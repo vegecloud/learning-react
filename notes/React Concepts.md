@@ -23,4 +23,6 @@ The .jsx file extention works only because we are working in a React project tha
 Fundamental React concepts:
 1. We can output **dynamic content** in JSX by including curly braces **{ }** within JSX code.
 2.  We can also build and reuse components by configuring them with **props** - that is, passing configuration data into components as parameters to define the internal logic and JSX code that should be rendered.
-
+3. React sets a default **children** prop - which refers to the content between our component tags (component composition). This is accessible via React's default prop or through object destructuring of the default prop.
+4. There are built-in **event listeners** (e.g. onClick for button elements) that we can use to react to events; we provide a function that should be executed when the event occurs.
+5. Component functions only execute once. To update the UI, we must use React **hooks** (e.g. useState) to tell React that some data has changed and to re-execute the component function.
