@@ -21,8 +21,65 @@ The .jsx file extention works only because we are working in a React project tha
 ### 2. React Concepts
 
 Fundamental React concepts:
+
 1. We can output **dynamic content** in JSX by including curly braces **{ }** within JSX code.
 2.  We can also build and reuse components by configuring them with **props** - that is, passing configuration data into components as parameters to define the internal logic and JSX code that should be rendered.
 3. React sets a default **children** prop - which refers to the content between our component tags (component composition). This is accessible via React's default prop or through object destructuring of the default prop.
 4. There are built-in **event listeners** (e.g. onClick for button elements) that we can use to react to events; we provide a function that should be executed when the event occurs.
 5. Component functions only execute once. To update the UI, we must use React **hooks** (e.g. useState) to tell React that some data has changed and to re-execute the component function.
+
+---
+
+### 3. React Essentials
+
+General guidelines when building React projects:
+
+* We can generally split components by **features** or **states**. Separation of components by states prevents unnecessary re-rendering of other components that are not tied to the respective states.
+* The **rest operator (...)** can be used to forward props that are received when using a component. These forwarded props can then be used in our components. This is useful when building wrapper components.
+
+
+``` javascript
+<Section title="Examples" id="section-styling">
+  // child components
+</Section>
+
+function Section({ title, children, ...props }) {
+  return (
+    <section {...props}>
+      <h2>{title}</h2>
+      {children}
+    </section>
+  )
+}
+```
+
+* We can **pass JSX codes as props to wrapper components** - instead of including them inside components - to maintain our states outside of these components and increase their reusability.
+
+``` javascript
+<Tabs
+  buttons={
+    <>
+      <TabButton
+        isSelected={selectedTopic}
+        onClick={() => handleSelect('components')}>Components</TabButton>
+      <TabButton
+        isSelected={selectedTopic}
+        onClick={() => handleSelect('states')}>States</TabButton>
+    </>
+  }
+>
+  {tabContent}
+</Tabs>
+
+function Tabs({ children, buttons }) {
+  return (
+    <>
+      <menu>
+        {buttons}
+      </menu>
+      {children}
+    </>
+  )
+}
+```
+
