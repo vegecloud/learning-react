@@ -53,13 +53,15 @@ function Section({ title, children, ...props }) {
 }
 ```
 
-* We can **pass JSX codes as props to wrapper components** - instead of including them inside components - to maintain our states outside of these components and increase their reusability.
+* We can **pass JSX codes as props to wrapper components** - instead of including them inside components - to maintain our states outside of these components and increase their reusability. This includes setting component types dynamically.
 
 ``` javascript
 <Tabs
+  buttonsContainer={myComponent} // use string for built-in html elements (e.g. "menu")
   buttons={
     <>
       <TabButton
+        isSelected={selectedTopic}
         isSelected={selectedTopic}
         onClick={() => handleSelect('components')}>Components</TabButton>
       <TabButton
@@ -71,12 +73,13 @@ function Section({ title, children, ...props }) {
   {tabContent}
 </Tabs>
 
-function Tabs({ children, buttons }) {
+function Tabs({ children, buttons, buttonsContainer }) {
+  const ButtonsContainer = buttonContainer; // dynamically passed component
   return (
     <>
-      <menu>
+      <ButtonsContainer>
         {buttons}
-      </menu>
+      </ButtonsContainer>
       {children}
     </>
   )
